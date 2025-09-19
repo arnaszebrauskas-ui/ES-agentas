@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="lt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DI Agentas: Europos Asistentas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        #chat-container::-webkit-scrollbar { width: 8px; }
+        #chat-container::-webkit-scrollbar-track { background: #f1f5f9; }
+        #chat-container::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
+        #chat-container::-webkit-scrollbar-thumb:hover { background: #64748b; }
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <div class="flex flex-col h-screen max-w-4xl mx-auto bg-white shadow-2xl">
+        <header class="bg-blue-700 text-white p-4 text-center rounded-t-lg shadow-md">
+            <h1 class="text-2xl font-bold">DI Agentas „Europos Asistentas“</h1>
+            <p class="text-sm opacity-90">Jūsų pagalbininkas ES projektų administravimo klausimais</p>
+        </header>
+
+        <div id="chat-container" class="flex-1 p-6 overflow-y-auto space-y-6">
+            <div class="agent-message">
+                <div class="flex items-start gap-3">
+                    <div class="bg-blue-600 text-white p-2 rounded-full h-10 w-10 flex items-center justify-center font-bold text-lg">EA</div>
+                    <div class="bg-blue-100 text-slate-800 p-4 rounded-lg rounded-tl-none shadow-sm max-w-lg">
+                        <p class="font-semibold mb-2">Sveiki! Aš esu „Europos Asistentas“.</p>
+                        <p class="text-sm">Esu apmokytas pagal 2021-2027 m. ES fondų investicijų programos administravimo ir projektų finansavimo taisykles (IPPAT ir PAFT). Galiu padėti rasti atsakymus, susijusius su sutarčių valdymu, finansavimu ir kitais administraciniais procesais.</p>
+                        <p class="text-sm mt-3">Kaip galiu jums padėti šiandien? Galite pradėti nuo šių temų:</p>
+                        <div id="suggestion-chips" class="mt-3 flex flex-wrap gap-2">
+                            <button class="suggestion-chip bg-white hover:bg-blue-200 text-blue-800 text-xs font-semibold py-1 px-3 rounded-full border border-blue-300 transition-colors">Papildomas finansavimas</button>
+                            <button class="suggestion-chip bg-white hover:bg-blue-200 text-blue-800 text-xs font-semibold py-1 px-3 rounded-full border border-blue-300 transition-colors">Sutaupytų lėšų panaudojimas</button>
+                            <button class="suggestion-chip bg-white hover:bg-blue-200 text-blue-800 text-xs font-semibold py-1 px-3 rounded-full border border-blue-300 transition-colors">Sutarties keitimas</button>
+                            <button class="suggestion-chip bg-white hover:bg-blue-200 text-blue-800 text-xs font-semibold py-1 px-3 rounded-full border border-blue-300 transition-colors">Avanso mokėjimas</button>
+                            <button class="suggestion-chip bg-white hover:bg-blue-200 text-blue-800 text-xs font-semibold py-1 px-3 rounded-full border border-blue-300 transition-colors">Pirkimų priežiūra</button>
+                             <button class="suggestion-chip bg-white hover:bg-blue-200 text-blue-800 text-xs font-semibold py-1 px-3 rounded-full border border-blue-300 transition-colors">Sutarties pasirašymas</button>
+                             <button class="suggestion-chip bg-white hover:bg-blue-200 text-blue-800 text-xs font-semibold py-1 px-3 rounded-full border border-blue-300 transition-colors">Lėšų perskirstymas</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="bg-slate-50 border-t border-slate-200 p-4">
+            <div class="flex items-center gap-3">
+                <input type="text" id="user-input" class="flex-1 p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none transition" placeholder="Įveskite savo klausimą...">
+                <button id="send-button" class="bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors disabled:bg-slate-400">
+                    Klausti
+                </button>
+            </div>
+        </footer>
+    </div>
+
+<script>
+    // --- KNOWLEDGE BASE (ŽINIŲ BAZĖ) ---
+    // Norėdami apmokyti agentą, redaguokite šį `knowledgeBase` objektą.
+    const knowledgeBase = {
+        'papildom': {
+            title: 'Papildomas projekto finansavimas',
+            answer: `<p class="mb-2">Taip, įgyvendinami projektai gali būti papildomai finansuojami esant tam tikroms sąlygoms. Papildomas finansavimas galimas, kai:</p><ul class="list-disc list-inside text-sm space-y-1 pl-2"><li>Planuojama didesnė projekto apimtis, kuri duotų daugiau socialinės/ekonominės naudos (planavimo būdu atrinktiems projektams).</li><li>Dėl objektyvių, nenumatytų priežasčių padidėja projekto išlaidų suma.</li><li>Didinama projekto veiklos finansuojamoji dalis, nekeičiant bendros išlaidų sumos.</li><li>Atsiranda išlaidų dėl institucijų keliamų papildomų reikalavimų, kurių nebuvo PĮP teikimo metu.</li></ul><p class="mt-3 text-sm">Projekto vykdytojas turi pateikti raštišką prašymą ministerijai (arba RPPl administruojančiajai institucijai), kuri priima preliminarų sprendimą. Galutinis sprendimas priimamas po to, kai administruojančioji institucija atlieka papildomo finansavimo vertinimą.</p>`,
+            source: 'Šaltinis: PAFT IV skyrius, trečiasis skirsnis (121-131 p.)'
+        },
+        'sutaupyt': {
+            title: 'Sutaupytų lėšų panaudojimas',
+            answer: `<p class="mb-2">Projekto vykdytojas, įgyvendindamas projektą sutaupęs lėšų, gali kreiptis į administruojančiąją instituciją dėl jų panaudojimo. Sutaupytas lėšas galima panaudoti, jei:</p><ul class="list-disc list-inside text-sm space-y-1 pl-2"><li>Numatoma įgyvendinti projektą didesne apimtimi (pasiekti daugiau rezultatų, įvykdyti daugiau veiklų).</li><li>Reikia padidinti projekto veiklos finansuojamąją dalį (planavimo būdu atrinktiems projektams).</li><li>Reikia apmokėti išlaidas, atsiradusias dėl institucijų keliamų papildomų reikalavimų.</li><li>Reikia apmokėti kitas tinkamas finansuoti išlaidas, kurių nebuvo įmanoma numatyti anksčiau.</li></ul><p class="mt-3 text-sm"><strong>Svarbu:</strong> EGADP lėšomis finansuojamų projektų sutaupytos lėšos negali būti panaudotos, išskyrus atvejus, kai tai būtina projekto sutartyje nustatytiems rodikliams pasiekti.</p>`,
+            source: 'Šaltinis: PAFT IV skyrius, trečiasis skirsnis (132-136 p.)'
+        },
+        'keitimas': {
+            title: 'Projekto sutarties keitimas',
+            answer: `<p class="mb-2">Projekto sutartis gali būti keičiama projekto vykdytojo arba administruojančiosios institucijos iniciatyva, jeigu atsiranda planuoto įgyvendinimo nukrypimų.</p><p class="text-sm mb-2">Administruojančioji institucija, priimdama sprendimą dėl sutarties keitimo, atsižvelgia į šias aplinkybes:</p><ul class="list-disc list-inside text-sm space-y-2 pl-2"><li>Ar pakeistas projektas atitiks nustatytus reikalavimus (pagal Taisykles, PFSA, RPPl ir Gaires).</li><li>Kokia bus nukrypimų įtaka projekto finansavimo sumai, tinkamumui finansuoti ir atitikčiai atrankos kriterijams.</li><li>Ar bus pasiektas projekto tikslas.</li><li>Ar bus pasiekti nustatyti stebėsenos rodikliai (tiek EGADP, tiek 2021-2027 m. ES fondų).</li><li>Ar stebėsenos rodiklio reikšmės keitimas yra pagrįstas (pvz., dėl sumažėjusios veiklų apimties ar nuo vykdytojo nepriklausančių veiksnių).</li><li>Sutartis nekeičiama, jei galutinėje ataskaitoje nurodoma, kad stebėsenos rodiklis nepasiektas.</li></ul><p class="mt-3 text-sm">Administruojančioji institucija taip pat turi teisę vienašališkai keisti sutartį, pavyzdžiui, kai mažinama finansavimo suma dėl nustatytų pažeidimų arba keičiasi teisės aktai.</p>`,
+            source: 'Šaltinis: PAFT IV skyrius, antrasis skirsnis (106 p.)'
+        },
+        'perskirst': {
+            title: 'Lėšų perskirstymas tarp projekto veiklų',
+            answer: `<p class="mb-2">Lėšos tarp projekto veiklų <strong>negalima perskirstyti</strong>, jeigu tenkinama bent viena iš šių sąlygų:</p><ul class="list-disc list-inside text-sm space-y-1 pl-2"><li>Projekto veiklos yra finansuojamos skirtingų fondų lėšomis.</li><li>Projekto veiklos yra įgyvendinamos skirtinguose regionuose.</li><li>Regionų plėtros planų (RPPl) projekto veiklos yra finansuojamos pagal
